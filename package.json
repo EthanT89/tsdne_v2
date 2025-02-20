@@ -1,8 +1,17 @@
 {
-  "dependencies": {
-    "eslint": "^9.20.1",
-    "eslint-config-prettier": "^10.0.1",
-    "eslint-plugin-prettier": "^5.2.3",
-    "prettier": "^3.5.1"
+  "name": "tsdne_v2",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": ["frontend", "backend"],
+  "scripts": {
+    "start:frontend": "npm run dev --prefix frontend",
+    "start:backend": "npm run start:dev --prefix backend",
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "build:frontend": "npm run build --prefix frontend",
+    "build:backend": "npm run build --prefix backend",
+    "build": "npm run build:frontend && npm run build:backend"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0"
   }
 }

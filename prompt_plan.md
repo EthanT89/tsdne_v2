@@ -271,40 +271,136 @@ Below is a comprehensive, step-by-step blueprint for building the "This Story Do
 
 Below are separate prompt sections in markdown code blocks. Each prompt builds on previous work and ends by wiring new code into the overall system.
 
-### **Prompt 1: Project Scaffolding**
+### **Prompt 1: Project Initialization and Repository Setup**
 ```text
 Prompt:
-"Initialize a monorepo for 'This Story Does Not Exist' that contains two projects: a Next.js project for the frontend and a NestJS project for the backend. Configure TypeScript for both projects. In the Next.js project, install and configure Tailwind CSS with a minimal configuration file. In the NestJS project, set up a PostgreSQL connection using environment variables and create a basic folder structure. Add npm scripts to run both projects concurrently. Finally, include basic test files in both projects that verify the projects start correctly."
+Create a project repository with a monorepo structure that includes two directories: /frontend and /backend. 
+- For the frontend, initialize a Next.js project using TypeScript and integrate Tailwind CSS.
+- For the backend, initialize a NestJS project with TypeScript and configure a connection stub for PostgreSQL.
+- Setup basic linting and formatting configurations.
+- Include a simple README with an overview of the project.
+Ensure that both parts compile and run a basic "Hello World" page (frontend) and "Hello World" API endpoint (backend). Wire both so that running the root command builds both services.
 
-Prompt 2: Basic Frontend UI Components
+
+Prompt 2: Frontend Core Components – Layout and Styling
 Prompt:
-"Develop the core frontend UI components using Next.js, React, and TypeScript. Create a 'NarrativeDisplay' component that fills the screen and displays static narrative text. Build an 'InputArea' component that contains a text input field with placeholder text (to later support auto-suggestions). Also, create simple 'SidePanel' components to display player stats and inventory. Wire these components together into a main layout page. Finally, write unit tests using Jest and React Testing Library to ensure each component renders correctly."
+Develop the basic layout for the frontend application using Next.js and Tailwind CSS:
+- Create a main layout component that includes:
+  - A full-screen Narrative Display Area.
+  - Two side panels (one for player stats and one for inventory) with a toggle functionality.
+  - A persistent Input Area at the bottom for user commands.
+- Ensure responsive design and initial styling that fits a fantasy adventure theme.
+Write basic unit tests (using Jest and React Testing Library) for the layout components and ensure proper rendering.
+End this prompt by wiring the layout into the main page of the Next.js app.
 
-Prompt 3: Backend API for Turn Processing
+
+Prompt 3: Frontend – Input Handling and Dummy Auto-Suggestions
 Prompt:
-"Implement a NestJS controller with a POST endpoint at '/process-turn'. This endpoint should accept user input (a command) and return a stubbed AI response including narrative text and a structured JSON block (with fields for narrative summary, event type, and significance score). Define the narrative state JSON schema and incorporate basic error handling (including a retry mechanism for malformed responses). Write unit tests for this controller to verify that valid input returns the expected stubbed response."
+Implement the Input Area component with the following features:
+- A text input field that accepts user commands.
+- Display a list of hard-coded auto-suggestions based on a dummy context.
+- Handle input change events and a submit event that currently logs the input.
+- Integrate the Input Area into the main layout.
+Write tests for:
+  - Input value changes.
+  - Displaying auto-suggestions based on input.
+Wire this component so that submitting a command triggers a function call that will later connect to the backend API.
 
-Prompt 4: Frontend-Backend Integration
+
+Prompt 4: Backend – Turn Processing API and Dummy Response
 Prompt:
-"Integrate the frontend and backend by modifying the 'InputArea' component so that when the user submits a command, it calls the '/process-turn' API endpoint. Update the 'NarrativeDisplay' component to show the returned narrative text, and ensure the side panels update with any provided stats or inventory changes. Implement state management using React Context or Redux to maintain narrative state across components. Write integration tests to verify that the full flow—from user input through API response to UI update—works as expected."
+Develop a NestJS API endpoint at /api/process-turn that:
+- Accepts a POST request with a user command.
+- Returns a dummy response containing:
+  - A narrative text (string).
+  - A structured JSON object with keys: narrativeSummary, eventType, significanceScore, and any placeholder for state updates.
+- Include proper error handling and return status codes.
+Write unit tests for this endpoint to verify:
+  - Correct request handling.
+  - Proper JSON response structure.
+Wire this endpoint into the backend’s main module so it is accessible from the frontend.
 
-Prompt 5: Advanced UI Features & State Management
+
+Prompt 5: Frontend-Backend Integration for Turn Processing
 Prompt:
-"Enhance the frontend by adding processing feedback: implement a narrative-themed animation and ambient audio cues while waiting for the API response. Improve the 'InputArea' component to display context-sensitive auto-suggestions (static suggestions are acceptable initially). Enhance state management using React Context or Redux to maintain narrative state, player stats, and inventory across components. Write tests to verify that the processing animations, audio cues, and state updates function correctly when API responses are processed."
+Integrate the frontend Input Area with the backend API:
+- Modify the Input Area to send a POST request to /api/process-turn on command submission.
+- Parse the response and update the Narrative Display Area with the narrative text.
+- Temporarily log or display the JSON event structure in the side panels.
+- Implement error handling: if the API returns an error or malformed JSON, display a narrative-friendly error message.
+Write integration tests to simulate a full turn cycle (input submission, API call, narrative update).
+Wire this integration so that the entire turn-based cycle functions end-to-end.
 
-Prompt 6: User Authentication & Customization Bio
+
+Prompt 6: Backend – Narrative State Memory and Significance Scoring
 Prompt:
-"Implement user authentication and customization features. On the backend, create NestJS endpoints for user signup and login using email and password, and integrate JWT (or session-based) authentication. On the frontend, develop signup and login pages, along with a customization bio form that uses dropdowns for World Setting, Narrative Tone, Gameplay Style, Themes/Genres, and Pacing/Difficulty. Ensure that the customization bio data is sent to and stored by the backend. Write tests for the authentication endpoints and validate the frontend form."
+Enhance the backend by implementing narrative state memory management:
+- Design a JSON structure to store narrative events, character states, and world changes, including a significance score (0-100) for each event.
+- Create helper functions to insert, update, and summarize events based on significance thresholds.
+- Include basic persistence logic (for now, in-memory storage; later to be integrated with PostgreSQL).
+Write unit tests to verify:
+  - Correct insertion of events.
+  - Proper summarization when memory thresholds are reached.
+Ensure that the /api/process-turn endpoint now integrates with this memory management system, updating the state for every turn.
 
 
-Prompt 7: Save/Load Functionality and Memory Management
+
+Prompt 7: Backend – Save/Load Functionality and User Authentication
 Prompt:
-"Develop save and load functionality for the game state. In the backend, create endpoints to handle manual save slots (at least three) and implement an autosave mechanism that triggers on major narrative events or every five turns. Enhance the narrative state JSON structure to support memory management, including event significance scoring and dynamic summarization of older events. On the frontend, add UI elements that allow users to trigger save and load actions and display progress indicators. Write tests to verify that save/load operations correctly store and retrieve the narrative state."
+Implement game state persistence and user management:
+- Create endpoints for manual save (3 slots) and autosave (triggered every 5 turns). Ensure these endpoints store and retrieve the narrative state.
+- Develop user authentication endpoints (signup, login) using email and password.
+- Integrate a customization bio collection during signup.
+Write unit and integration tests to verify:
+  - Correct save and load operations.
+  - Successful user creation, authentication, and state retrieval.
+Wire these endpoints so that the frontend can interact with user sessions and game state persistence.
 
-Prompt 8: Final Integration, Error Handling, and Monitoring
+
+Prompt 8: Frontend – User Authentication and Customization Bio
 Prompt:
-"Wire all components together to form a cohesive system. Ensure that every API call is wrapped with robust error handling that displays narrative-themed fallback messages if failures occur. Integrate logging and monitoring tools (such as Sentry or Datadog) on the backend to capture error metrics and performance data. Develop an admin dashboard that displays key metrics like response times, error rates, token usage, and active user counts. Write comprehensive end-to-end tests to validate the complete flow—from user input, through narrative processing, to state updates, authentication, and save/load functionality."
+Develop the frontend components for user authentication:
+- Create pages for signup and login, including forms that capture email, password, and customization bio (using dropdowns for world setting, narrative tone, gameplay style, etc.).
+- Connect these forms to the backend authentication endpoints.
+- On successful login, store user session data and route to the main game interface.
+Write tests for form validation, submission, and successful authentication flows.
+Wire this into the overall app so that only authenticated users can access the game interface.
 
+Prompt 9: Testing & Quality Assurance – End-to-End Workflow
+Implement comprehensive testing for the full game flow:
+- Write end-to-end tests using Cypress that simulate:
+  - User signup/login.
+  - Submitting a command in the Input Area.
+  - Receiving a narrative update and JSON event structure.
+  - Verifying UI updates in the Narrative Display and Side Panels.
+- Ensure that error handling (e.g., malformed API responses) is tested.
+Integrate these tests into the CI pipeline.
+Wire the tests into the development process so that every commit triggers a full test suite.
+
+Prompt 10: Admin Dashboard and Monitoring Integration
+Build an admin dashboard for monitoring and analytics:
+- Create a secure frontend page that displays metrics like:
+  - API response times.
+  - Error rates.
+  - Token usage per session.
+  - Active user sessions.
+- Develop backend endpoints that aggregate and return these metrics.
+- Integrate error logging (with Sentry or Datadog stubs) to capture runtime errors.
+Write tests for:
+  - Data aggregation logic.
+  - API endpoint responses.
+Wire this dashboard into the project so that it is accessible only to administrators.
+
+Prompt 11: Deployment – Containerization and CI/CD
+Prepare the project for deployment:
+- Write Dockerfiles for both the frontend and backend services.
+- Create Kubernetes manifests (Deployments, Services, Ingress) to deploy the services on AWS.
+- Setup a basic CI/CD pipeline configuration (e.g., using GitHub Actions) that:
+  - Builds the Docker images.
+  - Runs all tests.
+  - Deploys to a staging environment on successful builds.
+Write tests (or use deployment checks) to ensure the containers start correctly and endpoints are reachable.
+Wire the CI/CD process so that every commit undergoes the full build-test-deploy cycle.
 
 4. Conclusion
-This iterative blueprint starts with a high-level plan, breaks it into manageable chunks, refines each chunk into detailed, small steps, and then provides a series of clear, test-driven prompts for a code-generation LLM. Each prompt builds on previous work and ensures there’s no orphaned or unintegrated code, prioritizing best practices, incremental progress, and early testing throughout the project.
+This iterative, prompt-driven approach ensures that each piece of functionality is small enough to be safely implemented and rigorously tested, while also steadily building toward the fully integrated project. Each prompt builds on the previous ones and ends with wiring components together, ensuring no orphaned code remains.

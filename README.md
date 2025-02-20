@@ -2,7 +2,7 @@
 
 Welcome to **This Story Does Not Exist**, where every choice you make writes a story only you can tell. You are both the reader and the written.
 
-Hi, I’m Ethan Thornberg! I built this project because I believe storytelling should be as limitless as your imagination. This project is my way of combining AI and creativity to build something truly unique. Check out the links below to see what else I’m working on—I’d love to connect!
+Hi, I’m Ethan Thornberg! I built this project because I believe storytelling should be as limitless as your imagination. This project is my way of combining AI and creativity to build something truly unique. 
 
 ## Overview
 

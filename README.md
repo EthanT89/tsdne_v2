@@ -261,10 +261,18 @@ tsdne_v2/
 
 ## Documentation
 
-- **[spec.md](./spec.md)** - Comprehensive project specification
-- **[prompt_plan.md](./prompt_plan.md)** - Detailed development blueprint
-- **[todo.md](./todo.md)** - Task checklist with progress tracking
-- **[PROJECT_ANALYSIS.md](./PROJECT_ANALYSIS.md)** - Current state analysis and roadmap
+### 📖 Start Here
+- **[QUICKSTART.md](./QUICKSTART.md)** - Quick overview and getting started guide
+- **[README.md](./README.md)** - This file: project overview and setup instructions
+
+### 📊 Planning & Analysis
+- **[PROJECT_ANALYSIS.md](./PROJECT_ANALYSIS.md)** - Comprehensive current state analysis with detailed roadmap
+- **[DEVELOPMENT_PHASES.md](./DEVELOPMENT_PHASES.md)** - Visual roadmap with phase-by-phase breakdown
+- **[todo.md](./todo.md)** - Detailed task checklist with completion tracking
+
+### 📐 Specifications & Design
+- **[spec.md](./spec.md)** - Complete feature specifications and technical design
+- **[prompt_plan.md](./prompt_plan.md)** - Detailed development blueprint with implementation prompts
 
 ## Contributing
 

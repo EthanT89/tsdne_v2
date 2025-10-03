@@ -2,38 +2,56 @@
 
 This checklist covers all key tasks for building the project. Each item represents a step or a group of related tasks. Check items off as you complete them to ensure thorough progress.
 
+**Last Updated:** January 2025  
+**Current Phase:** Immediate Fixes & Core Backend API  
+**Overall Completion:** ~15%
+
+---
+
+## 0. Immediate Fixes (PRIORITY 1)
+- [ ] **Frontend Build Fix**
+  - [ ] Remove or replace Google Fonts dependency causing build failure
+  - [ ] Verify frontend builds successfully
+- [ ] **Backend Test Fix**
+  - [ ] Update test expectation in app.controller.spec.ts to match actual output
+  - [ ] Verify backend tests pass
+- [ ] **Frontend Test Fix**
+  - [ ] Fix jest.setup.js to use CommonJS syntax
+  - [ ] Verify frontend tests run successfully
+
 ---
 
 ## 1. Project Setup & Scaffolding
-- [ ] **Monorepo Setup**
-  - [ ] Create a monorepo structure for both frontend and backend projects.
-  - [ ] Set up common configuration files and shared scripts.
-- [ ] **Frontend Setup (Next.js)**
-  - [ ] Initialize a Next.js project with TypeScript.
-  - [ ] Install and configure Tailwind CSS (create minimal configuration file).
-  - [ ] Establish a basic folder structure.
-- [ ] **Backend Setup (NestJS)**
-  - [ ] Initialize a NestJS project with TypeScript.
-  - [ ] Set up PostgreSQL connection using environment variables.
-  - [ ] Establish a basic folder structure.
-- [ ] **Concurrent Running**
-  - [ ] Add npm scripts to run both projects concurrently.
-- [ ] **Basic Testing**
-  - [ ] Write simple test files for both projects to verify they start correctly.
+- [x] **Monorepo Setup**
+  - [x] Create a monorepo structure for both frontend and backend projects.
+  - [x] Set up common configuration files and shared scripts.
+- [x] **Frontend Setup (Next.js)**
+  - [x] Initialize a Next.js project with TypeScript.
+  - [x] Install and configure Tailwind CSS (create minimal configuration file).
+  - [x] Establish a basic folder structure.
+- [x] **Backend Setup (NestJS)**
+  - [x] Initialize a NestJS project with TypeScript.
+  - [x] Set up PostgreSQL connection using environment variables.
+  - [x] Establish a basic folder structure.
+- [x] **Concurrent Running**
+  - [x] Add npm scripts to run both projects concurrently.
+- [x] **Basic Testing**
+  - [x] Write simple test files for both projects to verify they start correctly.
 
 ---
 
 ## 2. Basic Frontend UI Components
-- [ ] **Component Creation**
-  - [ ] Create a `NarrativeDisplay` component that fills the screen and displays static narrative text.
-  - [ ] Build an `InputArea` component with a text input field and placeholder for auto-suggestions.
-  - [ ] Create `SidePanel` components for displaying player stats (Health, Hunger, Thirst) and inventory.
-- [ ] **Layout Integration**
-  - [ ] Wire the above components together into a main layout page.
+- [x] **Layout Integration**
+  - [x] Wire components together into a main layout page (currently in single MainLayout component).
+- [ ] **Component Separation** (Next Step)
+  - [ ] Extract `NarrativeDisplay` component from MainLayout that fills the screen and displays narrative text.
+  - [ ] Extract `InputArea` component from MainLayout with a text input field and placeholder for auto-suggestions.
+  - [ ] Extract `SidePanel` components from MainLayout for displaying player stats (Health, Hunger, Thirst) and inventory.
 - [ ] **Placeholders**
   - [ ] Add placeholders for processing animations and ambient audio.
-- [ ] **Unit Testing**
-  - [ ] Write unit tests (using Jest and React Testing Library) to ensure each component renders correctly.
+- [x] **Unit Testing**
+  - [x] Write basic unit tests for MainLayout component (needs fixes to run).
+  - [ ] Add tests for individual components after separation.
 
 ---
 
